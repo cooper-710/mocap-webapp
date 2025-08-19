@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+dist/
+build/
+.cache/
+.tmp/
+npm-debug.log*
+yarn-*.log*
+.vite/
+.next/
+out/
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+*.swp

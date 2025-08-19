@@ -1,0 +1,243 @@
+/* ===== Sequence Design System ========================================== */
+
+/* Typeface: strong modern sans — tweak freely */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+
+:root{
+  /* Palette */
+  --bg-0: #07090d;
+  --bg-1: #0c1016;
+  --bg-2: #121824;
+  --ink-0: #e9eef7;
+  --ink-1: #cfd6e2;
+  --ink-2: #9ea8b8;
+
+  --accent: #e5812b;
+  --accent-strong: #f39a50;
+  --accent-deep: #c96916;
+
+  --glass: rgba(10,12,15,0.72);
+  --glass-brd: rgba(255,255,255,0.10);
+  --glass-inner: rgba(255,255,255,0.06);
+
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --shadow-soft: 0 10px 24px rgba(0,0,0,0.45);
+
+  /* Brand sizing (overridden in ThreeView via inline vars) */
+  --brand-img: 28px;
+  --brand-text: 18px;
+}
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg-0);
+  color: var(--ink-0);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+}
+
+.app-root{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* ===== Toolbar ========================================================== */
+
+.toolbar{
+  position: absolute;
+  top: 12px; left: 12px; right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-lg);
+  z-index: 10;
+  pointer-events: auto;
+  min-height: 64px;
+}
+
+.toolbar--glass{
+  background: var(--glass);
+  border: 1px solid var(--glass-brd);
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow-soft);
+}
+
+.toolbar .brand{
+  display:flex; align-items:center; gap:10px; margin-right: 8px;
+}
+.toolbar .brand img{
+  width: var(--brand-img);
+  height: var(--brand-img);
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--glass-brd);
+}
+.toolbar .brand .name{
+  font-weight: 800;
+  letter-spacing: .06em;
+  color: var(--ink-0);
+  font-size: var(--brand-text);
+}
+
+/* Player gets the bigger mark (ThreeView sets vars inline as well) */
+.toolbar.is-player{
+  --brand-img: 56px;
+  --brand-text: 24px;
+}
+
+/* Controls group */
+.control{
+  display:flex; align-items:center; gap:8px;
+}
+.control--wide{ min-width: 320px; }
+
+.label{
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.label.meta{
+  color: var(--ink-1);
+}
+
+/* Toggles (checkbox + label) */
+.toggle{
+  display:flex; align-items:center; gap:8px;
+  font-size:12px; color: var(--ink-1);
+}
+.toggle input{
+  accent-color: var(--accent);
+}
+
+/* ===== Buttons ========================================================== */
+
+.btn{
+  background: #1a1f26;
+  color: var(--ink-1);
+  border: 1px solid var(--glass-brd);
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 12px;
+  transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+}
+.btn:disabled{ opacity:.5; pointer-events:none; }
+
+.btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0,0,0,.35);
+  border-color: rgba(255,255,255,.18);
+}
+.btn:active{ transform: translateY(0); }
+
+.btn--primary{
+  color: #0b0e12;
+  font-weight: 700;
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-deep) 100%);
+  border-color: rgba(255,180,120,.45);
+  box-shadow: 0 0 0 1px rgba(255,180,120,.30), 0 8px 24px rgba(229,129,43,.35);
+}
+.btn--primary:hover{
+  background: linear-gradient(180deg, var(--accent-strong) 0%, var(--accent-deep) 100%);
+}
+.btn--ghost{
+  background: transparent;
+}
+
+/* ===== Selects ========================================================== */
+
+.select{
+  appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  background: linear-gradient(180deg, #0e1318, #0a0f14);
+  color: var(--ink-0);
+  border:1px solid var(--glass-brd);
+  border-radius: 8px;
+  padding: 6px 28px 6px 10px;
+  font-size:12px;
+  box-shadow: inset 0 0 0 1px var(--glass-inner);
+  transition: box-shadow .2s ease, border-color .2s ease, background .2s ease;
+  background-image:
+    linear-gradient(to bottom, transparent 50%, rgba(255,255,255,0.06) 50%),
+    url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23cfd6e2' d='M1.41 0L6 4.59 10.59 0 12 1.41 6 7.41 0 1.41z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat;
+  background-size: 100% 200%, 12px 8px;
+  background-position: 0 100%, right 8px center;
+}
+.select:hover{
+  border-color: rgba(255,255,255,.18);
+}
+.select:focus{
+  outline:none;
+  box-shadow: 0 0 0 2px rgba(229,129,43,.35);
+  border-color: rgba(229,129,43,.45);
+}
+
+/* ===== Sliders ========================================================== */
+
+.slider{
+  width: 180px; height: 20px;
+  background: transparent;
+  accent-color: var(--accent);
+  transition: filter .15s ease;
+}
+.slider:hover{ filter: brightness(1.05); }
+
+/* WebKit */
+.slider::-webkit-slider-runnable-track{
+  height: 4px; border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-deep) 100%);
+  box-shadow: inset 0 0 0 1px var(--glass-inner);
+}
+.slider::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width: 14px; height: 14px; margin-top: -5px;
+  border-radius:50%;
+  background: #fff;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px rgba(229,129,43,.2);
+  transition: transform .1s ease, box-shadow .2s ease;
+}
+.slider:active::-webkit-slider-thumb{
+  transform: scale(1.05);
+  box-shadow: 0 0 0 6px rgba(229,129,43,.28);
+}
+
+/* Firefox */
+.slider::-moz-range-track{
+  height: 4px; border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-deep) 100%);
+}
+.slider::-moz-range-thumb{
+  width: 14px; height: 14px; border-radius:50%;
+  background: #fff; border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px rgba(229,129,43,.2);
+}
+
+/* ===== Panels (graphs) ================================================== */
+
+.panel-stack{
+  position: absolute;
+  z-index: 9;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.panel{
+  border-radius: var(--radius-md);
+  background: rgba(12,16,22,0.72);
+  border: 1px solid var(--glass-brd);
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow-soft), inset 0 0 0 1px var(--glass-inner);
+  padding: 10px 10px 8px;
+}
+
+/* ===== Utility ========================================================== */
+
+.ui-shadow{ box-shadow: var(--shadow-soft); }
+
+/* Optional: nicer link focus */
+a:focus-visible, .btn:focus-visible, .select:focus-visible, .slider:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(229,129,43,.35);
+}
